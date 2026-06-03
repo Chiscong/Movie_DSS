@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "skills": {
+    "aws-lambda": {
+      "source": "awslabs/agent-plugins",
+      "sourceType": "github",
+      "skillPath": "plugins/aws-serverless/skills/aws-lambda/SKILL.md",
+      "computedHash": "4d8bf170420427f03d001d382fc7d59ff95cf1479794fc7b58fdbf8594afcd91"
+    },
+    "aws-serverless": {
+      "source": "aws/agent-toolkit-for-aws",
+      "sourceType": "github",
+      "skillPath": "skills/core-skills/aws-serverless/SKILL.md",
+      "computedHash": "ce7334f5eae64f3a4ce31cf5418f6b43d65db8ca2e112d6412cec81a17ee0914"
+    },
+    "data-engineering-data-pipeline": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/data-engineering-data-pipeline/SKILL.md",
+      "computedHash": "b7f96debd6f5fdfddcd2dfc72b294b59eeeaa5b893cab3a1f74670a8308d2f3b"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "516bd2154eb843a8240e43d5b285229129853114ad7075a5e141e1c08e408c84"
+    }
+  }
+}
