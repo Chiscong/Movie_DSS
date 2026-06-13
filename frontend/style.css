@@ -1,0 +1,435 @@
+/* ============================================================
+   Movie DSS – Global Styles
+   No inline styles, no dynamic/CDN-loaded fonts beyond
+   Google Fonts (stable, versioned URL below).
+   ============================================================ */
+
+/* Google Fonts – Inter (stable CDN, compatible with Cache-Control) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ── Reset / Box Model ───────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Design Tokens ───────────────────────────────────────────── */
+:root {
+  --color-bg:           #0f172a;
+  --color-surface:      #1e293b;
+  --color-surface-alt:  #273449;
+  --color-border:       #334155;
+  --color-primary:      #38bdf8;
+  --color-primary-dark: #0284c7;
+  --color-text:         #e2e8f0;
+  --color-text-muted:   #94a3b8;
+  --color-error:        #ef4444;
+  --color-error-bg:     #450a0a;
+  --color-error-border: #b91c1c;
+  --color-warning-bg:   #431407;
+  --color-warning-border:#c2410c;
+  --color-badge-movie:  #1d4ed8;
+  --color-badge-tv:     #7c3aed;
+  --color-badge-country:#065f46;
+  --color-score:        #fbbf24;
+
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  12px;
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+  --transition: 150ms ease;
+}
+
+/* ── Base ────────────────────────────────────────────────────── */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ── Header ──────────────────────────────────────────────────── */
+header {
+  background: linear-gradient(135deg, #1e3a5f 0%, #0f2744 100%);
+  border-bottom: 1px solid var(--color-border);
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+header h1 {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* ── Layout ──────────────────────────────────────────────────── */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+}
+
+/* ── Search Section / Form Container ─────────────────────────── */
+#search-section {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+#recommend-form {
+  display: grid;
+  /* Single column on mobile; two columns on desktop */
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+/* Two-column layout on wider screens */
+@media (min-width: 640px) {
+  #recommend-form {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Submit button area and loading span full width */
+  .form-actions {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ── Form Group ──────────────────────────────────────────────── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.625rem 0.75rem;
+  font-size: 0.9375rem;
+  font-family: var(--font-main);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* Custom select arrow */
+.form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3b8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2.25rem;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+.form-group input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+/* ── Year Inline Error ───────────────────────────────────────── */
+#year-error {
+  display: none;          /* hidden by default; JS sets display:block/inline */
+  font-size: 0.8125rem;
+  color: var(--color-error);
+  font-weight: 500;
+  margin-top: 0.2rem;
+  min-height: 1.2em;     /* prevent layout shift when message appears */
+}
+
+#year-error:not(:empty) {
+  display: block;
+}
+
+/* ── Form Actions (button + spinner container) ───────────────── */
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+/* ── Submit Button ───────────────────────────────────────────── */
+#submit-btn {
+  background: var(--color-primary);
+  color: #0f172a;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font-main);
+  cursor: pointer;
+  transition: background-color var(--transition), opacity var(--transition);
+  width: 100%;
+  letter-spacing: 0.01em;
+}
+#submit-btn:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+  color: #ffffff;
+}
+
+#submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Loading Spinner ─────────────────────────────────────────── */
+/* Hidden by default via [hidden] attribute; JS toggles hidden property */
+#loading {
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+}
+
+/* Override [hidden] so the flex layout applies when visible */
+#loading:not([hidden]) {
+  display: flex;
+}
+
+/* Spinner ring via CSS @keyframes */
+#loading::before {
+  content: '';
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Error Banner ────────────────────────────────────────────── */
+/* Hidden by default via [hidden] attribute; JS toggles hidden property */
+#error-area {
+  background: var(--color-error-bg);
+  border: 1px solid var(--color-error-border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  color: #fca5a5;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+/* Override [hidden] so the block layout applies when visible */
+#error-area:not([hidden]) {
+  display: block;
+}
+
+/* ── Results Section ─────────────────────────────────────────── */
+#results-section {
+  margin-top: 0.5rem;
+}
+
+#results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* No-results message */
+#results-list .no-results {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  padding: 2rem 0;
+}
+
+/* ── Result Card ─────────────────────────────────────────────── */
+.result-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--transition), transform var(--transition);
+}
+
+.result-card:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+/* Stack on small screens */
+@media (max-width: 500px) {
+  .result-card {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .score {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: end;
+  }
+}
+
+/* ── Rank ────────────────────────────────────────────────────── */
+.rank {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  min-width: 2.5rem;
+  text-align: center;
+  line-height: 1.2;
+  padding-top: 0.1rem;
+}
+
+/* ── Movie Info ──────────────────────────────────────────────── */
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0; /* allow text truncation */
+}
+
+/* ── Movie Name ──────────────────────────────────────────────── */
+.movie-name {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.3;
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* ── Meta Row ────────────────────────────────────────────────── */
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.year,
+.duration {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+/* ── Badges ──────────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15em 0.55em;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  line-height: 1.6;
+}
+
+.badge.type {
+  background: var(--color-badge-movie);
+  color: #bfdbfe;
+}
+
+/* TV Show gets a different tint */
+.badge.type[data-type="TV Show"] {
+  background: var(--color-badge-tv);
+  color: #ddd6fe;
+}
+
+.badge.country {
+  background: var(--color-badge-country);
+  color: #a7f3d0;
+}
+
+/* ── Genres ──────────────────────────────────────────────────── */
+.genres {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ── Description ─────────────────────────────────────────────── */
+.description {
+  font-size: 0.875rem;
+  color: var(--color-text);
+  line-height: 1.6;
+  /* Clamp to 4 lines – prefixed + standard for cross-browser support */
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Score ───────────────────────────────────────────────────── */
+.score {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-score);
+  white-space: nowrap;
+  text-align: right;
+  padding-top: 0.1rem;
+  min-width: 3.5rem;
+}
+
+/* ── Utility ─────────────────────────────────────────────────── */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
