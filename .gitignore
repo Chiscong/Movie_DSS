@@ -1,0 +1,9 @@
+lambda_deployment.zip
+.vscode
+.pytest_cache
+.kiro
+./home/congpc/Movie_DSS/model/__pycache__/
+.hypothesis/*
+backend/__pycache__/*
+backend/package
+backend/__pycache__/lambda_function.cpython-314.pyc

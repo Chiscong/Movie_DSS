@@ -3,11 +3,8 @@
  * Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 5.1, 5.2, 5.3, 5.4
  * ============================================================ */
 
-const API_URL = 'https://YOUR_API_GATEWAY_URL/recommend';
+const API_URL = 'https://v7bzd8fpr6.execute-api.ap-southeast-1.amazonaws.com/prod/recommend';
 
-// ---------------------------------------------------------------------------
-// Static data for <select> population
-// ---------------------------------------------------------------------------
 
 const GENRES = [
   'Action & Adventure Movies',

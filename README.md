@@ -153,6 +153,14 @@ Sau khi apply xong, Terraform in ra:
 ```
 api_endpoint      = "https://<id>.execute-api.<region>.amazonaws.com/prod/recommend"
 cloudfront_url    = "https://<domain>.cloudfront.net"
+
+
+api_endpoint = "https://v7bzd8fpr6.execute-api.ap-southeast-1.amazonaws.com/prod/recommend"
+artifacts_bucket = "movie-dss-artifacts-650251726830"
+cloudfront_url = "https://d287o4kd4hdhx.cloudfront.net"
+frontend_bucket = "movie-dss-frontend-650251726830"
+lambda_arn = "arn:aws:lambda:ap-southeast-1:650251726830:function:movie-dss-recommender"
+lambda_function_name = "movie-dss-recommender"
 ```
 
 Cập nhật `API_URL` trong `frontend/app.js` bằng `api_endpoint` ở trên, rồi chạy lại:

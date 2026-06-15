@@ -1,14 +1,3 @@
-"""
-Offline preprocessor for the Movie DSS Web application.
-
-Reads data/netflix_full.csv, cleans and normalises the data, trains a
-TF-IDF vectorizer, and writes three artifacts to model/:
-
-    vectorizer.pkl      – trained TfidfVectorizer
-    movie_vectors.pkl   – sparse TF-IDF matrix  (n_movies × n_features)
-    movies_clean.json   – JSON array of cleaned movie records
-"""
-
 import json
 import os
 import re
