@@ -131,6 +131,17 @@ ls -lh model/vectorizer.pkl model/movie_vectors.pkl model/movies_clean.json
 pip install -r backend/requirements.txt -t backend/package/
 cp backend/lambda_function.py backend/package/
 cd backend/package && zip -r ../../lambda_deployment.zip . && cd ../..
+
+# Upload lên S3
+aws s3 cp lambda_deployment.zip \
+  s3://movie-dss-artifacts-650251726830/lambda/lambda_deployment.zip
+
+# Update Lambda
+aws lambda update-function-code \
+  --function-name movie-dss-recommender \
+  --s3-bucket movie-dss-artifacts-650251726830 \
+  --s3-key lambda/lambda_deployment.zip \
+  --region ap-southeast-1
 ```
 
 ---
